@@ -8,8 +8,8 @@ from app.database.base_class import Base
 from app.api.deps import get_db
 from app.main import create_app
 
-# Test database URL (using aiosqlite for async SQLite)
-SQLALCHEMY_DATABASE_URL = "sqlite+aiosqlite:///./test.db"
+# Test database URL (using in-memory SQLite for faster tests)
+SQLALCHEMY_DATABASE_URL = "sqlite+aiosqlite:///:memory:"
 
 engine = create_async_engine(
     SQLALCHEMY_DATABASE_URL,

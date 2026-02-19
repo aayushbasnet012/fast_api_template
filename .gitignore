@@ -68,3 +68,4 @@ alembic/versions/*.pyc
 # OS
 Thumbs.db
 
+*.md
