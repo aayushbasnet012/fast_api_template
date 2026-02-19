@@ -11,7 +11,6 @@ A production-ready FastAPI project template with authentication, database models
 - ✅ API versioning (v1)
 - ✅ Pydantic settings management
 - ✅ APScheduler for scheduled jobs
-- ✅ Celery for distributed task processing
 - ✅ Comprehensive test suite
 - ✅ Docker support
 - ✅ CI/CD pipeline (GitHub Actions)
@@ -38,7 +37,7 @@ project-name/
 │   │   ├── database/         # Database setup
 │   │   ├── middleware/       # Custom middleware
 │   │   ├── utils/            # Utility functions
-│   │   └── workers/          # Celery tasks and APScheduler jobs
+│   │   └── workers/          # APScheduler jobs
 │   ├── tests/                # Test suite
 │   └── alembic/              # Database migrations
 ├── docker/                   # Docker configuration
@@ -184,6 +183,7 @@ Key variables:
 - `SECRET_KEY` - Secret key for JWT tokens
 - `ACCESS_TOKEN_EXPIRE_MINUTES` - Token expiration time
 - `CORS_ORIGINS` - Allowed CORS origins
+- `SCHEDULER_TIMEZONE` - Timezone for APScheduler (default: UTC)
 
 ## Database Migrations
 
@@ -202,28 +202,9 @@ Rollback migration:
 alembic downgrade -1
 ```
 
-## Schedulers
+## Scheduler
 
-This project includes both **APScheduler** and **Celery** for task scheduling:
-
-### APScheduler
-APScheduler runs scheduled jobs within the FastAPI application process. Jobs are automatically started when the application starts. See `docs/scheduler.md` for detailed documentation.
-
-### Celery
-Celery is configured for distributed task processing. To use Celery:
-
-1. Set up Redis (included in docker-compose.yml)
-2. Configure Celery settings in `.env`:
-   ```env
-   CELERY_BROKER_URL=redis://localhost:6379/0
-   CELERY_RESULT_BACKEND=redis://localhost:6379/0
-   ```
-3. Start Celery worker:
-   ```bash
-   celery -A app.workers.tasks.celery_app worker --loglevel=info
-   ```
-
-For more details, see `docs/scheduler.md`.
+This project uses **APScheduler** for scheduled jobs. Jobs run within the FastAPI application process and are started automatically when the application starts. See `docs/scheduler.md` for detailed documentation.
 
 ## License
 

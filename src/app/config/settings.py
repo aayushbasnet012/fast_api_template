@@ -57,14 +57,10 @@ class Settings(BaseSettings):
     CORS_ALLOW_METHODS: list[str] = ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
     CORS_ALLOW_HEADERS: list[str] = ["*"]
 
-    # Redis (optional, for caching/workers)
+    # Redis (optional, for caching)
     REDIS_URL: Optional[str] = None
 
-    # Celery (optional)
-    CELERY_BROKER_URL: Optional[str] = None
-    CELERY_RESULT_BACKEND: Optional[str] = None
-
-    # APScheduler (optional)
+    # APScheduler
     SCHEDULER_TIMEZONE: str = "UTC"
     SCHEDULER_JOBSTORES: Optional[dict] = None
     SCHEDULER_EXECUTORS: Optional[dict] = None
